@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import YepKit
+import YepConfig
 
-class ChatRightAudioCell: ChatRightBaseCell {
+final class ChatRightAudioCell: ChatRightBaseCell {
 
     var audioPlayedDuration: Double = 0 {
         willSet {
@@ -42,6 +44,7 @@ class ChatRightAudioCell: ChatRightBaseCell {
     lazy var sampleView: SampleView = {
         let view = SampleView()
         view.sampleColor = UIColor.rightWaveColor()
+        view.userInteractionEnabled = false
         return view
     }()
 
@@ -89,7 +92,7 @@ class ChatRightAudioCell: ChatRightBaseCell {
         }
 
         bubbleImageView.userInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: "tapMediaView")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ChatRightAudioCell.tapMediaView))
         bubbleImageView.addGestureRecognizer(tap)
 
         prepareForMenuAction = { otherGesturesEnabled in
@@ -121,7 +124,7 @@ class ChatRightAudioCell: ChatRightBaseCell {
         }
 
         if let sender = message.fromFriend {
-            let userAvatar = UserAvatar(userID: sender.userID, avatarStyle: nanoAvatarStyle)
+            let userAvatar = UserAvatar(userID: sender.userID, avatarURLString: sender.avatarURLString, avatarStyle: nanoAvatarStyle)
             avatarImageView.navi_setAvatar(userAvatar, withFadeTransitionDuration: avatarFadeTransitionDuration)
         }
 

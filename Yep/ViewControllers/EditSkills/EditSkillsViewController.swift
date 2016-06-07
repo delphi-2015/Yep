@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import YepNetworking
 import Ruler
 import RealmSwift
+import YepKit
 
-class EditSkillsViewController: BaseViewController {
+final class EditSkillsViewController: BaseViewController {
 
     var skillSet: SkillSet?
     var afterChangedSkillsAction: (() -> Void)?
@@ -40,7 +42,7 @@ class EditSkillsViewController: BaseViewController {
         // get all skill categories
 
         allSkillCategories(failureHandler: { (reason, errorMessage) -> Void in
-            defaultFailureHandler(reason, errorMessage: errorMessage)
+            defaultFailureHandler(reason: reason, errorMessage: errorMessage)
 
         }, completion: { skillCategories -> Void in
             self.skillCategories = skillCategories
